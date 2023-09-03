@@ -1,0 +1,129 @@
+//team 07//
+//invoice calculation//
+import java.util.Scanner;
+
+public class InvoiceItem {
+    private String id;
+    private String desc;
+    private int qty;
+    private double unitPrice;
+
+    public InvoiceItem(String id, String desc, int qty, double unitPrice) {
+        this.id = id;
+        this.desc = desc;
+        this.qty = qty;
+        this.unitPrice = unitPrice;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public int getQty() {
+        return qty;
+    }
+
+    public void setQty(int qty) {
+        this.qty = qty;
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public double getTotal() {
+        return unitPrice * qty;
+    }
+    public String toString() {
+        return "InvoiceItem[id=" + id + ", desc=" + desc + ", qty=" + qty + ", unitprice=" + unitPrice + "]";
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the number of items: ");
+        int numberOfItems = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline character
+
+        double grandTotal = 0.0;
+
+        for (int i = 1; i <= numberOfItems; i++) {
+            System.out.print("Enter item ID for item " + i + ": ");
+            String id = scanner.nextLine();
+
+            System.out.print("Enter item description for item " + i + ": ");
+            String desc = scanner.nextLine();
+
+            System.out.print("Enter quantity for item " + i + ": ");
+            int qty = scanner.nextInt();
+
+            System.out.print("Enter unit price for item " + i + ": ");
+            double unitPrice = scanner.nextDouble();
+
+            scanner.nextLine(); // Consume the newline character
+
+            InvoiceItem item = new InvoiceItem(id, desc, qty, unitPrice);
+            grandTotal += item.getTotal();
+
+            System.out.println("Invoice Item " + i + " created:");
+            System.out.println(item.toString());
+            System.out.println("Total for item " + i + ": Rs." + item.getTotal());
+        }
+
+        System.out.println("Grand Total: Rs." + grandTotal);
+
+        scanner.close();
+    }
+}
+
+//Grade//
+import java.util.Scanner;
+
+public class StudentGradeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Enter marks for 5 subjects:");
+        int[] marks = new int[5];
+        for (int i = 0; i < 5; i++) {
+            System.out.print("Subject " + (i + 1) + ": ");
+            marks[i] = scanner.nextInt();
+        }
+        
+        int totalMarks = 0;
+        for (int mark : marks) {
+            totalMarks += mark;
+        }
+        
+        double averageMarks = (double) totalMarks / 5;
+        
+        char grade;
+        if (averageMarks >= 91 && averageMarks <= 100) {
+            grade = 'O';
+        } else if (averageMarks >= 81 && averageMarks <= 90) {
+            grade = 'A';
+        } else if (averageMarks >= 71 && averageMarks <= 80) {
+            grade = 'B';
+        } else if (averageMarks >= 61 && averageMarks <= 70) {
+            grade = 'C';
+        } else if (averageMarks >= 50 && averageMarks <= 60) {
+            grade = 'D';
+        } else {
+            grade = 'F';
+        }
+        
+        System.out.println("Total Marks: " + totalMarks);
+        System.out.println("Average Marks: " + averageMarks);
+        System.out.println("Grade: " + grade);
+        
+        scanner.close();
+    }
+}
